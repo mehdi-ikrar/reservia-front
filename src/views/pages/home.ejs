@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <%- include('../partials/head') %>
+    <body>
+
+            
+            <header>
+                <img class="logo" src="images/logo_reservia.png" alt="Logo de Reservia">
+                <nav>
+                    
+                    <ul>
+                        <li class="TABhebergements">
+                            <a href="#hebergement">
+                                <span>Hébergements</span>
+                            </a>
+                        </li>
+                        <li class="TABactivity">
+                            <a href="#activity">
+                                <span>Activités</span>
+                            </a>
+                        </li>               
+                        <li class="login">
+                            <a href="#">
+                                <span>S'inscrire</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </header>
+        <div class="main">
+            <section id="search">
+                <h1>Trouvez votre hébergement pour des vacances de rêve</h1>
+                <p><span class="subtitle-search">En plein centre ville ou en pleine nature</span> </p>
+                <div id="search-content">
+                    <div class="maps">
+                        <i class="fas fa-map-marker-alt"></i> 
+                    </div> 
+                    <input type="search" placeholder="Marseille,France" > 
+                    <a href="#">
+                        <div class="search-button">
+                            <p>Rechercher</p>
+                            <div>
+                                <i class="fas fa-search"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div id="FILTERcontent">     
+                    <div class="titlesfilter">
+                        <h4>Filtres</h4>
+                    </div>                    
+                    <div class="underFILTERcontent">
+                        <a href="#">
+                            <div class="underFILTER">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <p>Économique</p>                          
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="underFILTER"> 
+                                <i class="fas fa-child"></i>
+                                <p>Familial</p>
+                            </div>
+                        </a>
+                        <a href="#">                         
+                            <div class="underFILTER"> 
+                                <i class="fas fa-heart"></i>
+                                <p>Romantique</p>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="underFILTER"> 
+                                <i class="fas fa-dog"></i>
+                                <p>Animaux autorisés</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="info">
+                    <div class="infoICON">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="infotext">
+                        <p>Plus de 500 logements sont disponibles dans cette ville </p>
+                    </div>
+                </div>
+            </section>
+            
+            <div id="TOPbody"> 
+                <section id="hebergement">
+                    <div class="HBtitle">
+                        <h2>Hébergements à Marseille</h2>
+                    </div>
+                    <figure id="figure1">
+                        <% hotels.forEach((hotel) => { %>
+
+                        <div class="HBarticle">
+                            <a href="#"> 
+                                <img class="imgHB" src="images/<%= hotel.image %>" alt="<%= hotel.name %>">
+                                    <div class="infoHB">
+                                    <div class="description-hb">
+                                        <h3><%= hotel.name %></h3>
+                                        <div class="priceHB">
+                                            <p>Nuit à partir de <%= hotel.price %>€</p>
+                                        </div>
+                                    </div>
+                                    <div class="starsHB">
+                                        <ul>
+                                            <% for (let i = 0; i < hotel.rating; i++) { %>
+                                                <li><i class="fas fa-star"></i></li>
+                                            <% } %>
+                                            <% for (let i = hotel.rating; i < 5; i++) { %>
+                                                <li class="starsempty">
+                                                    <i class="fas fa-star"></i>
+                                                </li>
+                                            <% } %>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    <% }) %>
+                    </figure>
+                    <div class="HBmore">
+                        <a href="#">
+                            <p>Afficher plus</p>
+                        </a>
+                    </div>
+                </section>
+    
+                <aside>
+                    <div id="titlepopular">
+                        <h2>Les plus populaires</h2>
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+
+                        <% hotels.slice(0, 3).forEach((hotel) => { %>
+                        <a href="#">
+                            <div class="contentpopularimg">
+                                <img class="imgpopular" src="images/<%= hotel.image %>"" alt="" >
+                                <div class="infopopular">
+                                    <div class="txtpopular">
+                                        <h3><%= hotel.name %></h3>
+                                        <div class="pricepopular">
+                                            <p>Nuit à partir de <%= hotel.price %>€</p>
+                                        </div>
+                                    </div>
+                                    <div class="starscontent1">
+                                        <ul>
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                            <li><i class="fas fa-star"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </a>  
+                        <% }) %> 
+                        <div class="HBmore">
+                        <a href="#">
+                            <p>Afficher plus</p>
+                        </a>
+                    </div>  
+                 
+
+                </aside>
+            </div>
+
+            <section id="activity">
+                <div class="titleactivity">
+                    <h2> Activitées a Marseille</h2>
+                </div>
+                <figure class="activityfigure">
+                    <a href="#"> 
+                        <div class="soloactivity">
+                            <img class="imgactivity" src="images/activites/Vieux_port.jpg" alt="">
+                            <div class="activitydescription">
+                                <p>Vieux port</p> 
+                            </div>
+                        </div>
+                    </a>            
+                    <div class="groupe1">
+                        <a href="#">                            
+                            <div class="sousgroupe11">                            
+                                <img class="imggroupe11" src="images/activites/fort_de_pomegues.jpg" alt="">
+                                <div class="GRPactivitydescription">
+                                    <p>Fort de Pomègues</p> 
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="sousgroupe12">
+                                <img class="imggroupe12" src="images/activites/iles_de_frioul.jpg" alt="">
+                                <div class="GRPactivitydescription">
+                                    <p>Îles du Frioul</p>
+                                </div>                         
+                            </div>
+                        </a>
+                    </div>
+                    <a href="#">
+                        <div class="soloactivity2">
+                            <img class="imgactivity" src="images/activites/Parc_national_des_calanques.jpg" alt="">
+                            <div class="activitydescription">
+                                <p>Parc National des Calanques</p>
+                            </div>
+                        </div>
+                    </a>                    
+                    <div class="groupe2">
+                        <a href="#">
+                            <div class="sousgroupe21"> 
+                                <img class="imggroupe21" src="images/activites/Notre_dame_de_la_garde.jpg" alt="">
+                                <div class="GRPactivitydescription">
+                                    <p>Notre-Dame-de-la-Garge</p> 
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="sousgroupe22">
+                                <img class="imggroupe22" src="images/activites/Parc_Longchamp.jpg" alt="">
+                                <div class="GRPactivitydescription">
+                                    <p>Parc de Longchamp</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </figure>
+            </section>
+        </div>
+        
+        <%- include('../partials/footer') %>
+    </body>
+</html>
