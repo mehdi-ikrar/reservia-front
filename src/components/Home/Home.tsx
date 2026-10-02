@@ -95,7 +95,7 @@ export default function Home() {
 
       <div className="main">
         <section id="search">
-                <h1>Trouvez votre hébergement pour des vacances de rêve</h1>
+                <h1>Trouveza votre hébergement pour des vacances de rêve</h1>
                 <p><span className="subtitle-search">En plein centre ville ou en pleine nature</span> </p>
                 <div id="search-content">
                     <div className="maps">
