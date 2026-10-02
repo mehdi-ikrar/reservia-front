@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-
+import Header from "../Header/Header";
+import { NavLink } from "react-router-dom";
+import { useParams } from "react-router-dom";
 // Structure d'un hôtel
 interface Hotel {
   id: number;
@@ -14,6 +16,7 @@ interface Activity {
   id: number;
   name: string;
   image: string;
+  cityId: number | null;
 }
 interface THEME {
   id: number;
@@ -48,14 +51,9 @@ export default function Home() {
     : cities.filter((city) =>
         city.name.toLocaleLowerCase("fr").includes(cityQuery.toLocaleLowerCase("fr"))
       );
-      const activityHotels = hotels.filter((activities) => {
-        const matchesActivityCity = !selectedCity || activities.cityId === selectedCity.id;
-        const matchesThemes = selectedThemeIds.length === 0 ||
-          selectedThemeIds.every((selectedId) =>
-            hotel.themes?.some((theme) => theme.id === selectedId)
-          );
-        return matchesActivityCity && matchesThemes;
-      });
+      const filteredActivities = activities.filter(
+        (activity) => !selectedCity || activity.cityId === selectedCity.id
+      );
   const filteredHotels = hotels.filter((hotel) => {
     const matchesCity = !selectedCity || hotel.cityId === selectedCity.id;
     const matchesThemes = selectedThemeIds.length === 0 ||
@@ -66,10 +64,10 @@ export default function Home() {
     return matchesCity && matchesThemes;
   });
   const columns: Activity[][] = [
-  activities.slice(0, 1),
-  activities.slice(1, 3),
-  activities.slice(3, 4),
-  activities.slice(4, 6),
+  filteredActivities.slice(0, 1),
+  filteredActivities.slice(1, 3),
+  filteredActivities.slice(3, 4),
+  filteredActivities.slice(4, 6),
 ];
   useEffect(() => {
     const loadHotels = async () => {
@@ -94,28 +92,6 @@ export default function Home() {
 
   return (
     <div className="main-container">
-      <header>
-        <img className="logo" src="images/logo_reservia.png" alt="Logo de Reservia" />
-        <nav>
-          <ul>
-            <li className="TABhebergements">
-              <a href="#hebergement">
-                <span>Hébergements</span>
-              </a>
-            </li>
-            <li className="TABactivity">
-              <a href="#activity">
-                <span>Activités</span>
-              </a>
-            </li>
-            <li className="login">
-              <a href="#">
-                <span>S'inscrire</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </header>
 
       <div className="main">
         <section id="search">
@@ -224,14 +200,14 @@ export default function Home() {
         <div id="TOPbody"> 
           <section id="hebergement">
             <div className="HBtitle">
-              <h2>Hébergements à Marseille</h2>
+              <h2>Hébergements à {selectedCity?.name ?? "toutes les villes"}</h2>
             </div>
             
             <figure id="figure1">
               {filteredHotels.slice(0, 6).map((hotel) => (
                 <div className="HBarticle" key={hotel.id}>
                   {/* Le reste de ta carte hôtel ne change pas */}
-                  <a href="#"> 
+                  <NavLink to={`/hotel/${hotel.id}`}>
                     <img className="imgHB" src={`images/${hotel.image}`} alt={hotel.name} />
                     <div className="infoHB">
                       <h3>{hotel.name}</h3>
@@ -261,7 +237,7 @@ export default function Home() {
                         </ul>
                       </div>
                     </div>
-                  </a>
+                  </NavLink>
                 </div>
               ))}
             </figure>
@@ -283,7 +259,7 @@ export default function Home() {
                           .sort((a, b) => b.rating - a.rating) // Trie du plus grand au plus petit (5 étoiles d'abord)
                           .slice(0, 3) // On prend les 3 premiers du tableau trié
                           .map((hotel) => (
-                            <a href="#" className="contentpopularimg" key={hotel.id}>
+                            <NavLink className="contentpopularimg" to={`/hotel/${hotel.id}`}>
                               <img className="imgpopular" src={`images/${hotel.image}`} alt="Popular hotel" />
                               
                               <div className="infopopular">
@@ -307,7 +283,7 @@ export default function Home() {
                                   </ul>
                                 </div>
                               </div>
-                            </a>
+                            </NavLink>
                           ))}  
                  
                         <div className="HBmore">
@@ -321,7 +297,7 @@ export default function Home() {
                 </div>
                 <section id="activity">
                 <div className="titleactivity">
-                    <h2> Activitées a Marseille</h2>
+                    <h2> Activitées  {selectedCity?.name ?? " danstoutes les villes"}</h2>
                 </div>
                 <figure className="activityfigure">
                 
@@ -329,12 +305,12 @@ export default function Home() {
                   <div className="activity-column" key={colIndex}>
                     {column.map((activity) => (
                       activity && (
-                        <a href="#" key={activity.id}>
+                        <NavLink to={`/activity/${activity.id}`}>
                           <article className="activity-card">
                             <img className="imgactivity" src={`images/${activity.image}`} alt={activity.name} />
                             <h3 className="titleCardActivity">{activity.name}</h3>
                           </article>
-                        </a>
+                        </NavLink>
                       )
                     ))}
                   </div>

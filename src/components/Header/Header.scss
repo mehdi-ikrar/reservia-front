@@ -1,0 +1,138 @@
+@use "../../styles/variable" as *;
+
+$border: #D9D9D9;
+$light-blue: #DEEBFF;
+
+// Préfixe .site-header pour passer devant les règles globales header / nav / ul
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #e6e6e6;
+
+  .sh-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    width: 90%;
+    height: 72px;
+    margin: 0 auto;
+  }
+
+  .sh-brand {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .sh-logo {
+    display: block;
+    height: 44px;
+    width: auto;
+    margin: 0;
+    position: static;
+  }
+
+  .sh-nav {
+    display: flex;
+    align-items: center;
+    height: auto;
+    margin: 0;
+  }
+
+  .sh-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .sh-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 40px;
+    padding: 0 18px;
+    border-radius: 50px;
+    color: black;
+    font-size: 1.05rem;
+    font-weight: 700;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+
+    .fas { font-size: 0.95em; }
+
+    &:hover { background: $light-blue; }
+
+    &.sh-link-active {
+      background: $light-blue;
+      color: $primary;
+    }
+  }
+
+  .sh-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .sh-btn-ghost,
+  .sh-btn-primary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 20px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: box-shadow 0.2s ease;
+
+    &:hover { box-shadow: 0 0 16px blue; }
+  }
+
+  .sh-btn-ghost {
+    border: 2px solid $border;
+    background: white;
+    color: black;
+  }
+
+  .sh-btn-primary {
+    background: $primary;
+    color: white;
+  }
+}
+
+@media only screen and (max-width: 1025px) {
+  .site-header .sh-inner { width: 94%; }
+}
+
+@media only screen and (max-width: 668px) {
+  .site-header {
+    .sh-inner {
+      flex-wrap: wrap;
+      height: auto;
+      padding: 10px 0;
+      gap: 10px;
+    }
+
+    .sh-logo { height: 36px; }
+
+    .sh-nav {
+      order: 3;
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .sh-btn-ghost span { display: none; }
+    .sh-btn-ghost { padding: 0 14px; }
+  }
+}
