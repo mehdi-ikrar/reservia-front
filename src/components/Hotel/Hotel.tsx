@@ -3,6 +3,11 @@ import apiBaseURL from "../Api/ApiBaseURL";
 import { useParams } from "react-router-dom";
 import "./Hotel.scss"
 
+interface City {
+  id: number;
+  name: string;
+}
+
 
 interface Hotel {
   id: number;
@@ -12,6 +17,7 @@ interface Hotel {
   rating: number;
   description: string;
   cityId: number | null;
+  city?: City;
 }
 export default function Hotel() {
 
