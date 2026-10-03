@@ -1,7 +1,7 @@
 import "./Activity.scss";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-
+import apiBaseURL from "../Api/ApiBaseURL";
 interface Activity {
   id: number;
   name: string;
@@ -11,12 +11,12 @@ interface Activity {
 
 export default function Activity() {
   const { id } = useParams();
-  const [activity, setActivity] = useState<Activity[]>([]);
+  const [activity, setActivity] = useState<Activity | null>(null);
 
   useEffect(() => {
-        const loadGame = async () => {
+        const loadActivity = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/activity/${id}`);
+                const response = await fetch(`${apiBaseURL}/activity/${id}`);
 
                 if (!response.ok) {
                     throw new Error('Échec de la récupération des données');
@@ -34,7 +34,7 @@ export default function Activity() {
             }
         };
 
-        loadGame();
+        loadActivity();
     }, [id]);
   return (
     <div className="main-container">
@@ -46,13 +46,13 @@ export default function Activity() {
           <i className="fas fa-chevron-right"></i>
           <a href="/#activity">Activités</a>
           <i className="fas fa-chevron-right"></i>
-          <span>{activity.name}</span>
+          <span>{activity?.name ?? ""}</span>
         </nav>
 
         {/* EN-TÊTE */}
         <section className="ap-header">
           <div>
-            <h1>{activity.name}</h1>
+            <h1>{activity?.name ?? ""}</h1>
             <div className="ap-meta">
               <span className="badge-theme">Nature</span>
               <span><i className="fas fa-map-marker-alt"></i> Marseille, France</span>
@@ -80,7 +80,7 @@ export default function Activity() {
 
         {/* IMAGE */}
         <figure className="ap-cover">
-          <img src={`/images/${activity.image}`} alt={activity.name} />
+          <img src={`/images/${activity?.image ?? ""}`} alt={activity?.name ?? ""} />
         </figure>
 
         <div className="ap-body">
@@ -90,7 +90,7 @@ export default function Activity() {
 
             <section className="ap-card">
               <h2>À propos de cette activité</h2>
-              <p>{activity.description}</p>
+              <p>{activity?.description ?? ""}</p>
             </section>
 
             <section className="ap-card">
