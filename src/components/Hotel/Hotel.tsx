@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import apiBaseURL from "../Api/ApiBaseURL";
 import { useParams } from "react-router-dom";
 import "./Hotel.scss"
 
@@ -7,18 +7,21 @@ import "./Hotel.scss"
 interface Hotel {
   id: number;
   name: string;
-  description: string;
+  price: number;
   image: string;
+  rating: number;
+  description: string;
+  cityId: number | null;
 }
 export default function Hotel() {
 
   const { id } = useParams();
-  const [hotel, setHotel] = useState<Hotel[]>([]);
+  const [hotel, setHotel] = useState<Hotel | null>(null);
 
   useEffect(() => {
-        const loadGame = async () => {
+        const loadHotel = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/hotel/${id}`);
+                const response = await fetch(`${apiBaseURL}/hotel/${id}`); 
 
                 if (!response.ok) {
                     throw new Error('Échec de la récupération des données');
@@ -36,7 +39,7 @@ export default function Hotel() {
             }
         };
 
-        loadGame();
+        loadHotel();
     }, [id]);
   return (
     <div className="main-container">
@@ -52,7 +55,7 @@ export default function Hotel() {
         {/* EN-TÊTE */}
         <section className="hp-header">
           <div className="hp-header-text">
-            <h1>{hotel.name}</h1>
+            <h1>{hotel?.name}</h1>
             <div className="hp-meta">
               <div className="hp-stars">
                 <ul>
@@ -64,7 +67,7 @@ export default function Hotel() {
                 </ul>
               </div>
               <span className="hp-location">
-                <i className="fas fa-map-marker-alt"></i> {hotel?.city?.name}, France
+                <i className="fas fa-map-marker-alt"></i> {hotel?.city?.name ?? ""}, France
               </span>
             </div>
           </div>
@@ -80,11 +83,11 @@ export default function Hotel() {
 
         {/* GALERIE */}
         <section className="hp-gallery">
-          <img className="hp-gallery-main" src={`/images/${hotel.image}`} alt={hotel.name} />
-          <img className="hp-gallery-sub" src={`/images/${hotel.image}`} alt="" />
-          <img className="hp-gallery-sub" src={`/images/${hotel.image}`} alt="" />
-          <img className="hp-gallery-sub" src={`/images/${hotel.image}`} alt="" />
-          <img className="hp-gallery-sub" src={`/images/${hotel.image}`} alt="" />
+          <img className="hp-gallery-main" src={`/images/${hotel?.image ?? ""}`} alt={hotel?.name ?? ""} />
+          <img className="hp-gallery-sub" src={`/images/${hotel?.image ?? ""}`} alt="" />
+          <img className="hp-gallery-sub" src={`/images/${hotel?.image ?? ""}`} alt="" />
+          <img className="hp-gallery-sub" src={`/images/${hotel?.image ?? ""}`} alt="" />
+          <img className="hp-gallery-sub" src={`/images/${hotel?.image ?? ""}`} alt="" />
         </section>
 
         <div className="hp-body">
@@ -94,7 +97,7 @@ export default function Hotel() {
 
             <section className="hp-card">
               <h2>À propos de cet hébergement</h2>
-              <p>{hotel.description}</p>
+              <p>{hotel?.description}</p>
               <div className="hp-themes">
                 <span className="badge-theme">Romantique</span>
                 <span className="badge-theme">Vue mer</span>
@@ -145,7 +148,7 @@ export default function Hotel() {
           <aside className="hp-booking">
             <div className="hp-price">
               <span>À partir de</span>
-              <strong>{hotel.price}</strong>
+              <strong>{hotel?.price ?? ""}</strong>
               <span>/ nuit</span>
             </div>
 

@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import Header from "../Header/Header";
 import { NavLink } from "react-router-dom";
 import { useParams } from "react-router-dom";
-// Structure d'un hôtel
+import apiBaseURL from "../Api/ApiBaseURL";
 interface Hotel {
   id: number;
   name: string;
@@ -72,7 +71,7 @@ export default function Home() {
   useEffect(() => {
     const loadHotels = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/home`);
+        const response = await fetch(`${apiBaseURL}/home`);
         const data = await response.json();
 
         
