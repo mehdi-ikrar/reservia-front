@@ -5,12 +5,12 @@ const Footer = () => {
             <div className="containefooter">
                 <h2>A propos</h2>
                 <div>
-                    <a href="#">
+                    <a href="https://mehdiikrar.fr/">
                         <p>Fonctionnement du site</p>
                     </a>
                 </div>
                 <div>
-                    <a href="#">
+                    <a href="https://mehdiikrar.fr/">
                         <p>Condition générale de vente</p>
                     </a>
                 </div>
@@ -30,7 +30,7 @@ const Footer = () => {
                     </a>
                 </div>
                 <div>
-                    <a href="#">
+                    <a href="https://mehdiikrar.fr/">
                         <p>Soumettre votre hôtel</p>
                     </a>
                 </div>              
@@ -40,12 +40,12 @@ const Footer = () => {
                     <h2>Assistance</h2>
                 </div>
                 <div>
-                    <a href="#">
+                    <a href="https://mehdiikrar.fr/">
                         <p>Centre d'aide</p>
                     </a>
                 </div>
                 <div>
-                    <a href="#">               
+                    <a href="https://mehdiikrar.fr/">               
                         <p>Nous contacter</p>
                     </a>
                 </div>     

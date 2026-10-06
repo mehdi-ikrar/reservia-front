@@ -117,9 +117,8 @@ ul{
 @media only screen and (max-width: 668px)
  {
     .logo{
-        position: relative;
-        right: 115px;
-        margin: -35px;
+        margin: auto;
+
     } 
     .login{
         position: absolute;
@@ -273,7 +272,6 @@ input{
     font-size: 1.05em;
     padding-left:1em ; 
 }
-
 .city-picker{
     position: relative;
     flex: 1;
@@ -360,7 +358,7 @@ input{
     align-items: center;
     font-size: 17px;
     height: 35px;
-    padding-right: 15px;
+    padding: 0 15px 0 0;
     color: black;
     white-space: nowrap; 
     background-color: white;
@@ -377,8 +375,8 @@ input{
 .underFILTER .fas{
     border-radius: 50px ;
     background-color: #DEEBFF;
-    padding: 5px;
-    margin-left: -3px;
+    padding: 3.8px;
+    margin-left: -1.5px;
     margin-right: 10px;
     width: 28px;
     height: 28px;
@@ -1389,7 +1387,7 @@ footer > .logo{
     }
 
     .search-button{
-        padding: 0 14px;
+
         font-size: 1.1em;
         display: none;
     }
