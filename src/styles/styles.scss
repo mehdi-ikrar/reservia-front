@@ -6,7 +6,35 @@ body {
   font-family: "Raleway", "Sans serif";
   margin: 0;
 }
+.network-loader {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 11000; // au-dessus du reste
+
+  &--hidden {
+    display: none;
+  }
+
+  &__spinner {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 6px solid rgba(255, 255, 255, 0.35);
+    border-top-color: rgb(156, 89, 220);
+    animation: network-spin 0.8s linear infinite;
+  }
+}
+
+@keyframes network-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 .fas{
     color: $primary;
 }
