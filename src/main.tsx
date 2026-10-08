@@ -11,6 +11,8 @@ function setupNetworkLoader() {
 
   let pending = 0;
   let receivedData = false;
+  let showTimer: number | null = null;
+  const showDelayMs = 200;
 
   const show = () => {
     loaderEl.classList.remove("network-loader--hidden");
@@ -22,6 +24,12 @@ function setupNetworkLoader() {
     loaderEl.setAttribute("aria-hidden", "true");
   };
 
+  const cancelScheduledShow = () => {
+    if (showTimer === null) return;
+    window.clearTimeout(showTimer);
+    showTimer = null;
+  };
+
   const originalFetch = window.fetch.bind(window);
 
   window.fetch = async (...args) => {
@@ -30,7 +38,15 @@ function setupNetworkLoader() {
     }
 
     pending++;
-    show();
+    if (showTimer === null && loaderEl.classList.contains("network-loader--hidden")) {
+      showTimer = window.setTimeout(() => {
+        showTimer = null;
+
+        if (pending > 0 || !receivedData) {
+          show();
+        }
+      }, showDelayMs);
+    }
     let requestReceivedData = false;
 
     try {
@@ -51,6 +67,7 @@ function setupNetworkLoader() {
       receivedData = receivedData || requestReceivedData;
 
       if (pending === 0 && receivedData) {
+        cancelScheduledShow();
         hide();
       }
     }
