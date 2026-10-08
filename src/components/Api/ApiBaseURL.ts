@@ -1,3 +1,3 @@
-const apiBaseURL = 'http://localhost:3000';
+const apiBaseURL = 'https://reservia-back.onrender.com';
 
 export default apiBaseURL;
