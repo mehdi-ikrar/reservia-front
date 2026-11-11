@@ -2,7 +2,7 @@ name: CI/CD frontend reservia Render
 
 on:
   push:
-    branches: [ googlecloud ]
+    branches: [ master ]
 
 jobs:
   build-and-test:
