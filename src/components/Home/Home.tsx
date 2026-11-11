@@ -191,7 +191,7 @@ export default function Home() {
                         <i className="fas fa-info-circle"></i>
                     </div>
                     <div className="infotext">
-                        <p>Plus de 500 logements sont disponibles dans cette ville </p>
+                        <p>Plus de 50000000000 logements sont disponibles dans cette ville </p>
                     </div>
                 </div>
             </section>
