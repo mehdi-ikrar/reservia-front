@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import apiBaseURL from "../Api/ApiBaseURL";
 interface Hotel {
   id: number;

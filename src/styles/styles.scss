@@ -6,7 +6,42 @@ body {
   font-family: "Raleway", "Sans serif";
   margin: 0;
 }
+.network-loader {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 11000; // au-dessus du reste
+    p {
+      color: rgba(97, 21, 21, 0.973);
+      text-align: center;
+      margin-top: 16px;
+      font-size: 2em;
+      font-weight: bold;
+    }
+  &--hidden {
+    display: none;
+  }
+
+  &__spinner {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 6px solid rgba(255, 255, 255, 0.35);
+    border-top-color: $primary;
+    animation: network-spin 0.8s linear infinite;
+  }
+}
+
+@keyframes network-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 .fas{
     color: $primary;
 }
@@ -117,9 +152,8 @@ ul{
 @media only screen and (max-width: 668px)
  {
     .logo{
-        position: relative;
-        right: 115px;
-        margin: -35px;
+        margin: auto;
+
     } 
     .login{
         position: absolute;
@@ -273,7 +307,6 @@ input{
     font-size: 1.05em;
     padding-left:1em ; 
 }
-
 .city-picker{
     position: relative;
     flex: 1;
@@ -360,7 +393,7 @@ input{
     align-items: center;
     font-size: 17px;
     height: 35px;
-    padding-right: 15px;
+    padding: 0 15px 0 0;
     color: black;
     white-space: nowrap; 
     background-color: white;
@@ -377,8 +410,8 @@ input{
 .underFILTER .fas{
     border-radius: 50px ;
     background-color: #DEEBFF;
-    padding: 5px;
-    margin-left: -3px;
+    padding: 3.8px;
+    margin-left: -1.5px;
     margin-right: 10px;
     width: 28px;
     height: 28px;
@@ -1389,7 +1422,7 @@ footer > .logo{
     }
 
     .search-button{
-        padding: 0 14px;
+
         font-size: 1.1em;
         display: none;
     }
